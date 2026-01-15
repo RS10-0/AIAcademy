@@ -35,7 +35,6 @@
             color: var(--text-main);
             height: 100vh;
             overflow-x: hidden;
-            /* Subtle animated background mesh */
             background-image: 
                 radial-gradient(at 0% 0%, rgba(0, 242, 234, 0.15) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(255, 0, 85, 0.15) 0px, transparent 50%);
@@ -43,7 +42,7 @@
         }
 
         h1, h2, h3, .brand-font {
-            font-family: 'Space Grotesk', sans-serif; /* Techy font for headers */
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -110,7 +109,7 @@
 
         /* --- MAIN VIEW CONTAINER --- */
         .view-container {
-            padding-top: 120px; /* Space for fixed nav */
+            padding-top: 120px;
             min-height: 100vh;
             width: 100%;
             max-width: 1200px;
@@ -118,10 +117,8 @@
             position: relative;
         }
 
-        /* Utility: Hide sections */
         .hidden { display: none !important; }
 
-        /* Animation: Fade Up */
         .animate-view {
             animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -131,33 +128,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- VIEW 1: HOME --- */
-        .hero-split {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 50px;
-            align-items: center;
-            height: calc(80vh - 120px); /* Center vertically */
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            line-height: 1;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-text p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            max-width: 500px;
-        }
-
-        .cta-group { display: flex; gap: 20px; }
-
+        /* --- BUTTONS --- */
         .btn-main {
             padding: 15px 35px;
             background: var(--primary);
@@ -169,16 +140,31 @@
             border: none;
             box-shadow: 0 0 20px var(--primary-glow);
         }
-
         .btn-main:hover { transform: scale(1.05); }
 
-        /* Tech Card Visual */
+        /* --- HOME PAGE STYLES --- */
+        .hero-split {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+            height: calc(80vh - 120px);
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .tech-card {
             background: var(--bg-card);
             border: 1px solid rgba(255,255,255,0.1);
             padding: 30px;
             border-radius: var(--radius);
-            position: relative;
             backdrop-filter: blur(10px);
         }
         
@@ -190,13 +176,12 @@
             width: 100%;
         }
         .w-50 { width: 50%; }
-        .w-80 { width: 80%; }
         .accent-line { background: var(--primary); width: 30%; box-shadow: 0 0 10px var(--primary-glow); }
 
-        /* --- VIEW 2: COURSES (FULL SCREEN OVERLAY) --- */
+        /* --- COURSES PAGE STYLES --- */
         .courses-layout {
             display: grid;
-            grid-template-columns: 250px 1fr; /* Sidebar + Grid */
+            grid-template-columns: 250px 1fr;
             gap: 30px;
             height: 80vh;
         }
@@ -209,33 +194,19 @@
             height: 100%;
         }
 
-        .filter-sidebar h3 { margin-bottom: 20px; font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
-        
         .filter-opt {
-            display: block;
-            padding: 10px;
-            margin-bottom: 5px;
-            border-radius: 8px;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: 0.2s;
+            padding: 10px; margin-bottom: 5px; border-radius: 8px; color: var(--text-muted); cursor: pointer; transition: 0.2s;
         }
-
-        .filter-opt:hover, .filter-opt.active {
-            background: rgba(0, 242, 234, 0.1);
-            color: var(--primary);
-        }
+        .filter-opt:hover, .filter-opt.active { background: rgba(0, 242, 234, 0.1); color: var(--primary); }
 
         .course-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
-            overflow-y: auto; /* Scroll ONLY the grid, not the page */
+            overflow-y: auto;
             padding-right: 10px;
-            padding-bottom: 50px; /* Space for scrolling */
+            padding-bottom: 50px;
         }
-
-        /* Custom Scrollbar */
         .course-grid::-webkit-scrollbar { width: 6px; }
         .course-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
 
@@ -246,64 +217,90 @@
             padding: 20px;
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            display: flex; flex-direction: column; justify-content: space-between;
             min-height: 250px;
         }
-
-        .course-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.05);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
-        }
-
-        .course-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-        }
-
-        .lvl-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 0.7rem;
-            padding: 4px 8px;
-            border-radius: 4px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+        .course-card:hover { border-color: var(--primary); transform: translateY(-5px); background: rgba(255,255,255,0.05); }
 
         .play-btn {
-            margin-top: 20px;
-            padding: 10px;
-            width: 100%;
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.2s;
+            margin-top: 20px; padding: 10px; width: 100%; background: transparent; border: 1px solid var(--primary); color: var(--primary); border-radius: 8px; cursor: pointer; font-weight: 600;
+        }
+        .play-btn:hover { background: var(--primary); color: #0f172a; }
+        
+        .lvl-badge {
+            position: absolute; top: 20px; right: 20px; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .course-icon { font-size: 2rem; margin-bottom: 15px; color: var(--text-main); }
+
+        /* --- DASHBOARD / LOGIN STYLES --- */
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
         }
 
-        .play-btn:hover {
-            background: var(--primary);
-            color: #0f172a;
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
         }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .glass-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: white;
+            font-family: inherit;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .glass-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 242, 234, 0.2);
+        }
+
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .progress-bar {
+            width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 15px; overflow: hidden;
+        }
+        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 1s ease; }
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
             .navbar { width: 95%; padding: 0 15px; top: 10px; }
-            .logo span { display: none; } /* Hide text, show icon only on small screens */
+            .logo span { display: none; }
             .hero-split { grid-template-columns: 1fr; text-align: center; height: auto; padding-bottom: 50px; }
             .hero-text h1 { font-size: 3rem; }
             .cta-group { justify-content: center; }
             .courses-layout { grid-template-columns: 1fr; height: auto; }
-            .filter-sidebar { display: none; } /* Hide sidebar on mobile for simplicity */
+            .filter-sidebar { display: none; }
             .course-grid { overflow-y: visible; }
         }
 
@@ -321,7 +318,7 @@
             <div class="nav-btn" onclick="switchView('courses')">Courses</div>
             <div class="nav-btn" onclick="switchView('dashboard')">My Labs</div>
         </div>
-        <div style="font-size: 0.9rem; color: var(--primary); cursor: pointer;">
+        <div style="font-size: 0.9rem; color: var(--primary); cursor: pointer;" onclick="switchView('dashboard')">
             Login
         </div>
     </nav>
@@ -378,168 +375,179 @@
                 </aside>
 
                 <div class="course-grid">
-                    
                     <div class="course-card">
                         <span class="lvl-badge">Lvl 1</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-book-open"></i></div>
-                            <h3>AI Literacy & Foundations</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Understand how AI works, its impact, and responsible use.
-                            </p>
-                        </div>
+                        <div><div class="course-icon"><i class="fa-solid fa-book-open"></i></div><h3>AI Literacy</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Understand how AI works, its impact, and responsible use.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
                     <div class="course-card">
-                        <span class="lvl-badge" style="border-color: var(--primary); color: var(--primary);">Popular</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-comment-dots"></i></div>
-                            <h3>Prompting Mastery</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Master constraints and roles to get reliable outputs from ChatGPT.
-                            </p>
-                        </div>
+                        <span class="lvl-badge" style="border-color:var(--primary);color:var(--primary);">Popular</span>
+                        <div><div class="course-icon"><i class="fa-solid fa-comment-dots"></i></div><h3>Prompting Mastery</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Master constraints and roles to get reliable outputs from ChatGPT.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
                     <div class="course-card">
                         <span class="lvl-badge">Lvl 1</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-stopwatch"></i></div>
-                            <h3>AI for Productivity</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Automate daily tasks, summarize notes, and manage projects.
-                            </p>
-                        </div>
+                        <div><div class="course-icon"><i class="fa-solid fa-stopwatch"></i></div><h3>AI for Productivity</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Automate daily tasks, summarize notes, and manage projects.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
                     <div class="course-card">
                         <span class="lvl-badge">Lvl 2</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-palette"></i></div>
-                            <h3>AI in Creativity</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Combine human + AI creativity for music, story, and design.
-                            </p>
-                        </div>
+                        <div><div class="course-icon"><i class="fa-solid fa-palette"></i></div><h3>AI in Creativity</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Combine human + AI creativity for music, story, and design.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
                     <div class="course-card">
                         <span class="lvl-badge">Lvl 2</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-code"></i></div>
-                            <h3>AI Coding Basics</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Intro to Python/JS for AI. Learn to use SDKs and run scripts.
-                            </p>
-                        </div>
+                        <div><div class="course-icon"><i class="fa-solid fa-code"></i></div><h3>AI Coding Basics</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Intro to Python/JS for AI. Learn to use SDKs and run scripts.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
                     <div class="course-card">
                         <span class="lvl-badge">Lvl 2</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-network-wired"></i></div>
-                            <h3>API Integration</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Connect AI to Discord, Google Sheets, and build smart workflows.
-                            </p>
-                        </div>
+                        <div><div class="course-icon"><i class="fa-solid fa-network-wired"></i></div><h3>API Integration</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Connect AI to Discord, Google Sheets, and build smart workflows.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
                     <div class="course-card">
                         <span class="lvl-badge">Lvl 2</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-database"></i></div>
-                            <h3>Data & AI</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Understand datasets, cleaning data, and training basics.
-                            </p>
-                        </div>
+                        <div><div class="course-icon"><i class="fa-solid fa-database"></i></div><h3>Data & AI</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Understand datasets, cleaning data, and training basics.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
                     <div class="course-card">
-                        <span class="lvl-badge" style="border-color: var(--accent); color: var(--accent);">Project</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-hammer"></i></div>
-                            <h3>Mini AI Project Studio</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Guided builds: Chatbots, flashcard generators, and tutors.
-                            </p>
-                        </div>
+                        <span class="lvl-badge" style="border-color:var(--accent);color:var(--accent);">Project</span>
+                        <div><div class="course-icon"><i class="fa-solid fa-hammer"></i></div><h3>Mini AI Project Studio</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Guided builds: Chatbots, flashcard generators, and tutors.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
                     <div class="course-card">
                         <span class="lvl-badge">Core</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-                            <h3>AI Ethics & Society</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Case studies on bias, privacy, and regulation in the real world.
-                            </p>
-                        </div>
+                        <div><div class="course-icon"><i class="fa-solid fa-scale-balanced"></i></div><h3>AI Ethics & Society</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Case studies on bias, privacy, and regulation in the real world.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
-                    <div class="course-card">
+                     <div class="course-card">
                         <span class="lvl-badge">Lvl 3</span>
-                        <div>
-                            <div class="course-icon"><i class="fa-solid fa-flask"></i></div>
-                            <h3>Advanced AI Playground</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Open sandbox. Combine prompts, code, and APIs freely.
-                            </p>
-                        </div>
+                        <div><div class="course-icon"><i class="fa-solid fa-flask"></i></div><h3>Advanced AI Playground</h3><p style="font-size:0.9rem;color:var(--text-muted);margin-top:10px;">Open sandbox. Combine prompts, code, and APIs freely.</p></div>
                         <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-
                 </div>
             </div>
         </section>
 
         <section id="dashboard-view" class="hidden animate-view">
-            <div style="text-align: center; margin-top: 100px;">
-                <i class="fa-solid fa-lock" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 20px;"></i>
-                <h2>Restricted Area</h2>
-                <p>Please log in to access your project sandbox.</p>
-                <button class="btn-main" style="margin-top: 20px;">Login with Github</button>
+            
+            <div id="login-gate">
+                <div class="login-card">
+                    <h2 style="margin-bottom: 10px;">Join the Ecosystem</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 30px;">Create your account to access the labs.</p>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Username</label>
+                        <input type="text" id="username-input" class="glass-input" placeholder="e.g. Neo_2025">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Email</label>
+                        <input type="email" class="glass-input" placeholder="you@example.com">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Password</label>
+                        <input type="password" class="glass-input" placeholder="••••••••">
+                    </div>
+
+                    <button class="btn-main" style="width: 100%;" onclick="handleRegister()">Create Account</button>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 15px;">Already have an account? <span style="color: var(--primary); cursor: pointer;">Login</span></p>
+                </div>
             </div>
+
+            <div id="user-dashboard" class="hidden">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div>
+                        <h2 style="font-size: 2.5rem;">Welcome, <span id="user-name-display" style="color: var(--primary);">User</span>.</h2>
+                        <p style="color: var(--text-muted);">Here is your current learning trajectory.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 2rem; font-weight: bold;">3</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">DAY STREAK</div>
+                    </div>
+                </div>
+
+                <div class="dash-grid">
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between;">
+                            <h3>Current Module</h3>
+                            <i class="fa-solid fa-comment-dots" style="color: var(--primary);"></i>
+                        </div>
+                        <p style="margin-top: 10px; color: var(--text-muted);">Prompting Mastery</p>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 65%;"></div></div>
+                        <div style="margin-top: 5px; font-size: 0.8rem; text-align: right;">65% Complete</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between;">
+                            <h3>XP Earned</h3>
+                            <i class="fa-solid fa-trophy" style="color: var(--accent);"></i>
+                        </div>
+                        <h2 style="font-size: 2.5rem; margin-top: 10px;">1,250</h2>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Level 2 Builder</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between;">
+                            <h3>My Projects</h3>
+                            <i class="fa-solid fa-flask"></i>
+                        </div>
+                        <ul style="margin-top: 15px; font-size: 0.9rem;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <i class="fa-solid fa-check" style="color: var(--primary); margin-right: 8px;"></i> My First Chatbot
+                            </li>
+                            <li style="padding: 8px 0; color: var(--text-muted);">
+                                <i class="fa-regular fa-circle" style="margin-right: 8px;"></i> Image Generator API
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
     </div>
 
     <script>
+        // ROUTER
         function switchView(viewName) {
-            // 1. Hide all views
             document.getElementById('home-view').classList.add('hidden');
             document.getElementById('courses-view').classList.add('hidden');
             document.getElementById('dashboard-view').classList.add('hidden');
 
-            // 2. Remove active class from all nav buttons
             const navBtns = document.querySelectorAll('.nav-btn');
             navBtns.forEach(btn => btn.classList.remove('active'));
 
-            // 3. Show the selected view
             const targetView = document.getElementById(viewName + '-view');
             if (targetView) {
                 targetView.classList.remove('hidden');
-                
-                // Re-trigger animation
                 targetView.classList.remove('animate-view');
-                void targetView.offsetWidth; // Trigger reflow to restart animation
+                void targetView.offsetWidth; 
                 targetView.classList.add('animate-view');
             }
 
-            // 4. Update the active nav button style
-            // We find the button that has the onclick matching the viewName
             const activeBtn = Array.from(navBtns).find(btn => btn.getAttribute('onclick').includes(viewName));
             if(activeBtn) activeBtn.classList.add('active');
+        }
+
+        // LOGIN SIMULATION
+        function handleRegister() {
+            // 1. Get the username
+            const username = document.getElementById('username-input').value;
+            
+            // 2. Simple validation
+            if (!username) {
+                alert("Please enter a username to create your account.");
+                return;
+            }
+
+            // 3. Hide Login Gate, Show Dashboard
+            document.getElementById('login-gate').classList.add('hidden');
+            document.getElementById('user-dashboard').classList.remove('hidden');
+
+            // 4. Update the Welcome Text
+            document.getElementById('user-name-display').innerText = username;
         }
     </script>
 </body>
