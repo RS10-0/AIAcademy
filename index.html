@@ -232,6 +232,7 @@
             gap: 20px;
             overflow-y: auto; /* Scroll ONLY the grid, not the page */
             padding-right: 10px;
+            padding-bottom: 50px; /* Space for scrolling */
         }
 
         /* Custom Scrollbar */
@@ -366,13 +367,14 @@
                     <h3>Skill Level</h3>
                     <div class="filter-opt active">All Levels</div>
                     <div class="filter-opt">Beginner (Level 1)</div>
-                    <div class="filter-opt">Builder (Level 2)</div>
-                    <div class="filter-opt">Architect (Level 3)</div>
+                    <div class="filter-opt">Intermediate (Level 2)</div>
+                    <div class="filter-opt">Advanced (Level 3)</div>
                     
-                    <h3 style="margin-top: 30px;">Topics</h3>
-                    <div class="filter-opt">Prompt Engineering</div>
-                    <div class="filter-opt">LLM APIs</div>
-                    <div class="filter-opt">Ethics & Safety</div>
+                    <h3 style="margin-top: 30px;">Focus Area</h3>
+                    <div class="filter-opt">Foundations</div>
+                    <div class="filter-opt">Creative</div>
+                    <div class="filter-opt">Technical / Code</div>
+                    <div class="filter-opt">Ethics</div>
                 </aside>
 
                 <div class="course-grid">
@@ -380,50 +382,123 @@
                     <div class="course-card">
                         <span class="lvl-badge">Lvl 1</span>
                         <div>
-                            <div class="course-icon"><i class="fa-solid fa-brain"></i></div>
-                            <h3>Neural Networks 101</h3>
+                            <div class="course-icon"><i class="fa-solid fa-book-open"></i></div>
+                            <h3>AI Literacy & Foundations</h3>
                             <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                How machines actually think. No complex math required.
+                                Understand how AI works, its impact, and responsible use.
                             </p>
                         </div>
-                        <button class="play-btn">Initialize <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
 
                     <div class="course-card">
                         <span class="lvl-badge" style="border-color: var(--primary); color: var(--primary);">Popular</span>
                         <div>
                             <div class="course-icon"><i class="fa-solid fa-comment-dots"></i></div>
-                            <h3>Prompt Engineering</h3>
+                            <h3>Prompting Mastery</h3>
                             <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Stop guessing. Learn the syntax of talking to LLMs.
+                                Master constraints and roles to get reliable outputs from ChatGPT.
                             </p>
                         </div>
-                        <button class="play-btn">Initialize <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div class="course-card">
+                        <span class="lvl-badge">Lvl 1</span>
+                        <div>
+                            <div class="course-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                            <h3>AI for Productivity</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
+                                Automate daily tasks, summarize notes, and manage projects.
+                            </p>
+                        </div>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div class="course-card">
+                        <span class="lvl-badge">Lvl 2</span>
+                        <div>
+                            <div class="course-icon"><i class="fa-solid fa-palette"></i></div>
+                            <h3>AI in Creativity</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
+                                Combine human + AI creativity for music, story, and design.
+                            </p>
+                        </div>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
 
                     <div class="course-card">
                         <span class="lvl-badge">Lvl 2</span>
                         <div>
                             <div class="course-icon"><i class="fa-solid fa-code"></i></div>
-                            <h3>API Integration</h3>
+                            <h3>AI Coding Basics</h3>
                             <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                Connect GPT-4 to your own website with 10 lines of code.
+                                Intro to Python/JS for AI. Learn to use SDKs and run scripts.
                             </p>
                         </div>
-                        <button class="play-btn">Initialize <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
 
-                     <div class="course-card">
-                        <span class="lvl-badge">Lvl 1</span>
+                    <div class="course-card">
+                        <span class="lvl-badge">Lvl 2</span>
                         <div>
-                            <div class="course-icon"><i class="fa-solid fa-image"></i></div>
-                            <h3>AI Art Generation</h3>
+                            <div class="course-icon"><i class="fa-solid fa-network-wired"></i></div>
+                            <h3>API Integration</h3>
                             <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
-                                MidJourney, DALL-E, and Stable Diffusion mastery.
+                                Connect AI to Discord, Google Sheets, and build smart workflows.
                             </p>
                         </div>
-                        <button class="play-btn">Initialize <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
+
+                    <div class="course-card">
+                        <span class="lvl-badge">Lvl 2</span>
+                        <div>
+                            <div class="course-icon"><i class="fa-solid fa-database"></i></div>
+                            <h3>Data & AI</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
+                                Understand datasets, cleaning data, and training basics.
+                            </p>
+                        </div>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div class="course-card">
+                        <span class="lvl-badge" style="border-color: var(--accent); color: var(--accent);">Project</span>
+                        <div>
+                            <div class="course-icon"><i class="fa-solid fa-hammer"></i></div>
+                            <h3>Mini AI Project Studio</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
+                                Guided builds: Chatbots, flashcard generators, and tutors.
+                            </p>
+                        </div>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div class="course-card">
+                        <span class="lvl-badge">Core</span>
+                        <div>
+                            <div class="course-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                            <h3>AI Ethics & Society</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
+                                Case studies on bias, privacy, and regulation in the real world.
+                            </p>
+                        </div>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div class="course-card">
+                        <span class="lvl-badge">Lvl 3</span>
+                        <div>
+                            <div class="course-icon"><i class="fa-solid fa-flask"></i></div>
+                            <h3>Advanced AI Playground</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
+                                Open sandbox. Combine prompts, code, and APIs freely.
+                            </p>
+                        </div>
+                        <button class="play-btn">Start Module <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
                 </div>
             </div>
         </section>
