@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Academy | Learn AI the Right Way</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #00d4ff; /* Electric Blue */
+            --primary-dark: #00a3cc;
+            --secondary: #2d3436;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #1a1a2e;
+            --text-light: #636e72;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .text-center { text-align: center; }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #fff; /* White text for contrast */
+            border: 2px solid var(--primary);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f0faff 0%, #ffffff 100%);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-text h1 span { color: var(--primary); }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Simple CSS Illustration for Hero */
+        .hero-visual {
+            position: relative;
+            height: 400px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .code-block {
+            width: 80%;
+            background: #2d3436;
+            border-radius: 8px;
+            padding: 20px;
+            color: #00d4ff;
+            font-family: monospace;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features { background-color: var(--bg-white); }
+
+        .feature-card {
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            background: white;
+            box-shadow: var(--shadow);
+            border-color: #eee;
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 { margin-bottom: 10px; }
+        .feature-card p { color: var(--text-light); font-size: 0.95rem; }
+
+        /* --- COURSES SECTION --- */
+        .courses { background-color: var(--bg-light); }
+        
+        .section-header {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-header p { color: var(--text-light); }
+
+        .course-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+
+        .course-img {
+            height: 160px;
+            background-color: #dfe6e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b2bec3;
+            font-size: 3rem;
+        }
+        
+        .c-img-1 { background: linear-gradient(45deg, #6c5ce7, #a29bfe); color: white; }
+        .c-img-2 { background: linear-gradient(45deg, #00cec9, #81ecec); color: white; }
+        .c-img-3 { background: linear-gradient(45deg, #fd79a8, #e84393); color: white; }
+
+        .course-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .course-tag {
+            background: #e0faff;
+            color: var(--primary-dark);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            align-self: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .course-content h3 { margin-bottom: 10px; font-size: 1.25rem; }
+        .course-content p { color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; }
+        
+        .course-footer {
+            border-top: 1px solid #f1f1f1;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials { background-color: var(--bg-white); }
+        
+        .testimonial-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--radius);
+            position: relative;
+        }
+
+        .testimonial-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .testimonial-text {
+            margin-top: 30px;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .student-info h4 { font-size: 1rem; }
+        .student-info span { font-size: 0.85rem; color: var(--text-light); }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--secondary);
+            color: #fff;
+            padding-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-brand h2 { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .footer-brand p { color: #b2bec3; font-size: 0.9rem; margin-bottom: 20px; }
+
+        .footer-col h4 { margin-bottom: 20px; color: var(--primary); }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #dfe6e9; font-size: 0.9rem; transition: var(--transition); }
+        .footer-col ul li a:hover { color: var(--primary); padding-left: 5px; }
+
+        .newsletter-form input {
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .newsletter-form button {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .copyright {
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #b2bec3;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-buttons { justify-content: center; }
+            .hero-text h1 { font-size: 2.5rem; }
+            
+            .nav-links { display: none; } /* Simplified for single file - usually need JS toggle */
+            .mobile-menu-btn { display: block; font-size: 1.5rem; cursor: pointer; }
+            
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-menu-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fa-solid fa-brain"></i> AI Academy
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Start Learning</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Learn AI the <br><span>Right Way</span></h1>
+                    <p>From beginner to builder. Understand the concepts, master the tools, and create real-world AI projects in a safe, guided environment.</p>
+                    <div class="hero-buttons">
+                        <a href="#courses" class="btn btn-primary">Start Learning</a>
+                        <a href="#courses" class="btn btn-outline">Explore Courses</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="code-block">
+                        <p style="color: #6c5ce7">// AI Assistant</p>
+                        <p>function learnAI() {</p>
+                        <p>&nbsp;&nbsp;const user = "Beginner";</p>
+                        <p>&nbsp;&nbsp;return "Builder";</p>
+                        <p>}</p>
+                        <p style="margin-top: 10px; color: #fab1a0">> Output: Builder ready.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding features">
+        <div class="container">
+            <div class="grid-3">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-rocket"></i></div>
+                    <h3>Learn the Future</h3>
+                    <p>AI isn't just a trend; it's a core skill. We break down complex topics into bite-sized, understandable lessons.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h3>Hands-On Practice</h3>
+                    <p>Don't just watch videos. Use our interactive sandbox to write prompts and code directly in the browser.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3>Ethical & Safe</h3>
+                    <p>We teach responsible AI usage. Understand the risks and limitations while learning how to build safely.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="section-padding courses">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Courses</h2>
+                <p>Start your journey with our Level 1 curriculum.</p>
+            </div>
+            <div class="grid-3">
+                <div class="course-card">
+                    <div class="course-img c-img-1">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-tag">Beginner</span>
+                        <h3>What is AI?</h3>
+                        <p>Understanding the fundamentals. Neural networks, LLMs, and how machines "learn" without the math heavy-lifting.</p>
+                        <div class="course-footer">
+                            <span><i class="fa-regular fa-clock"></i> 45 mins</span>
+                            <a href="#" style="color: var(--primary); font-weight: 600;">Start <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-img c-img-2">
+                        <i class="fa-solid fa-message"></i>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-tag">Level 1</span>
+                        <h3>Prompting Basics</h3>
+                        <p>Learn how to talk to AI. Master the art of context, constraints, and instructions to get the best results.</p>
+                        <div class="course-footer">
+                            <span><i class="fa-regular fa-clock"></i> 1 hr 15 mins</span>
+                            <a href="#" style="color: var(--primary); font-weight: 600;">Start <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-img c-img-3">
+                        <i class="fa-solid fa-hammer"></i>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-tag">Project</span>
+                        <h3>Build a Mini AI Tool</h3>
+                        <p>Your first hands-on project. Create a simple text summarizer or study buddy using basic API concepts.</p>
+                        <div class="course-footer">
+                            <span><i class="fa-regular fa-clock"></i> 2 hrs</span>
+                            <a href="#" style="color: var(--primary); font-weight: 600;">Start <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="#" class="btn btn-outline">View Full Catalog</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Student Success</h2>
+            </div>
+            <div class="grid-3">
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p class="testimonial-text">"I was intimidated by AI, but this platform made it feel like a game. I built my first study assistant in 4 weeks!"</p>
+                    <div class="student-info">
+                        <h4>Sarah J.</h4>
+                        <span>Computer Science Student</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p class="testimonial-text">"The focus on ethics helped me understand not just how to use AI, but how to use it responsibly at work."</p>
+                    <div class="student-info">
+                        <h4>Marcus T.</h4>
+                        <span>Marketing Manager</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p class="testimonial-text">"Clean, fast, and to the point. The sandbox feature is amazing for testing prompts immediately."</p>
+                    <div class="student-info">
+                        <h4>Elena R.</h4>
+                        <span>Freelancer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2><i class="fa-solid fa-brain"></i> AI Academy</h2>
+                    <p>Democratizing AI education for everyone. Open source, accessible, and future-ready.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="#">All Courses</a></li>
+                        <li><a href="#">Level 1: Basics</a></li>
+                        <li><a href="#">Level 2: Building</a></li>
+                        <li><a href="#">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Mentorship</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Stay Updated</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 AI Academy. Built for learning.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile Menu Toggle (Simple implementation)
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            if(navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.background = 'white';
+                navLinks.style.padding = '20px';
+                navLinks.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
