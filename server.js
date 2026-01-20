@@ -1,4 +1,6 @@
 const express = require('express');
+// This serves your website files to the internet
+app.use(express.static('frontend'));
 const app = express();
 const PORT = 3000;
 
