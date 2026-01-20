@@ -1,1 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Academy | The Ecosystem</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-cube"></i>
+            <span>AI Academy</span>
+        </div>
+        <div class="nav-items">
+            <div class="nav-btn active" onclick="switchView('home')">Home</div>
+            <div class="nav-btn" onclick="switchView('courses')">Courses</div>
+            <div class="nav-btn" onclick="switchView('dashboard')">My Labs</div>
+        </div>
+        <div style="font-size: 0.9rem; color: var(--primary); cursor: pointer;" onclick="switchView('dashboard')">Login</div>
+    </nav>
+
+    <div class="view-container">
+        
+        <section id="home-view" class="animate-view">
+            <div class="hero-split">
+                <div class="hero-text">
+                    <h1>Master AI<br>Before It Masters You.</h1>
+                    <p>Stop scrolling, start building. The first interactive ecosystem designed to take you from "Prompt Guesser" to "AI Architect."</p>
+                    <div class="cta-group" style="display:flex; gap:20px;">
+                        <button class="btn-main" onclick="switchView('courses')">Enter Academy</button>
+                        <button class="btn-main" style="background:transparent; border:1px solid rgba(255,255,255,0.2); color:white; box-shadow:none;">Watch Demo</button>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 20px; opacity: 0.5;">
+                        <i class="fa-solid fa-terminal"></i> <i class="fa-solid fa-wifi"></i>
+                    </div>
+                    <div class="code-line w-50"></div> <div class="code-line w-80"></div> <div class="code-line w-80"></div> <div class="code-line accent-line"></div>
+                    <div style="margin-top: 30px; font-family: monospace; color: var(--primary);">
+                        > System Status: Online<br>> User: Ready to learn...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses-view" class="hidden animate-view">
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-size: 2rem;">Course Mainframe</h2>
+                <p style="color: var(--text-muted);">Select a module to load into your brain.</p>
+            </div>
+            <div class="courses-layout">
+                <aside class="filter-sidebar">
+                    <h3>Skill Level</h3>
+                    <div class="filter-opt active">All Levels</div> <div class="filter-opt">Beginner</div>
+                    <div class="filter-opt">Intermediate</div> <div class="filter-opt">Advanced</div>
+                </aside>
+                
+                <div class="course-grid">
+                    <div class="course-card">
+                        <span class="lvl-badge">Lvl 1</span>
+                        <div><div class="course-icon"><i class="fa-solid fa-book-open"></i></div><h3>AI Literacy</h3><p style="font-size:0.9rem;color:var(--text-muted);">Understand how AI works.</p></div>
+                        <button class="play-btn">Start Module</button>
+                    </div>
+                    <div class="course-card">
+                        <span class="lvl-badge" style="color:var(--primary); border-color:var(--primary);">Popular</span>
+                        <div><div class="course-icon"><i class="fa-solid fa-comment-dots"></i></div><h3>Prompting Mastery</h3><p style="font-size:0.9rem;color:var(--text-muted);">Master constraints and roles.</p></div>
+                        <button class="play-btn">Start Module</button>
+                    </div>
+                    <div class="course-card">
+                        <span class="lvl-badge" style="color:var(--accent); border-color:var(--accent);">Project</span>
+                        <div><div class="course-icon"><i class="fa-solid fa-flask"></i></div><h3>Build a Chatbot</h3><p style="font-size:0.9rem;color:var(--text-muted);">Create your own AI assistant.</p></div>
+                        <button class="play-btn">Start Module</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard-view" class="hidden animate-view">
+            <div id="login-gate">
+                <div class="login-card">
+                    <h2>My Labs Access</h2>
+                    <p style="margin-bottom:20px; color:var(--text-muted);">Enter credentials.</p>
+                    <input type="text" id="username-input" class="glass-input" placeholder="Username">
+                    <button class="btn-main" style="width: 100%;" onclick="handleRegister()">Login</button>
+                </div>
+            </div>
+
+            <div id="user-dashboard" class="hidden">
+                <div style="margin-bottom: 30px;">
+                    <h2>Welcome back, <span id="user-name-display" style="color: var(--primary);">User</span>.</h2>
+                </div>
+
+                <div class="hud-bar">
+                    <div class="hud-stat"><i class="fa-solid fa-bolt" style="color:#ffd700;"></i><div><div class="hud-value">1,250</div><div class="hud-label">XP</div></div></div>
+                    <div class="hud-stat"><i class="fa-solid fa-fire" style="color:var(--accent);"></i><div><div class="hud-value">4</div><div class="hud-label">Streak</div></div></div>
+                </div>
+
+                <div class="dash-layout">
+                    <div>
+                        <div class="dash-card">
+                            <h3>Project Dashboard</h3>
+                            <div class="project-grid">
+                                <div class="project-item">
+                                    <div class="proj-icon"><i class="fa-solid fa-robot"></i></div>
+                                    <h4>Customer Bot</h4>
+                                </div>
+                                <div class="project-item">
+                                    <div class="proj-icon" style="color:var(--accent);"><i class="fa-solid fa-image"></i></div>
+                                    <h4>Art Gen</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dash-card">
+                            <h3><i class="fa-solid fa-terminal" style="color:var(--primary); margin-right:10px;"></i>Playground</h3>
+                            <div class="mini-terminal">
+                                <span class="term-prompt">user@labs:~$</span>
+                                <input type="text" class="term-input" placeholder="Enter prompt...">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="dash-card">
+                            <h3>Recent Activity</h3>
+                            <div class="activity-item">
+                                <i class="fa-solid fa-check" style="color:var(--primary);"></i>
+                                <div><div>Completed "Basics"</div><div class="activity-time">2h ago</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="src/main.js"></script>
+</body>
+</html>
