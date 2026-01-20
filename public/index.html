@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Helper</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f4f4f9; }
+        h1 { color: #333; }
+        #chat-box { margin-top: 20px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: inline-block; }
+        input { padding: 10px; width: 200px; }
+        button { padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <h1>Study Helper v2.0</h1>
+    <p>Running on your local Node.js Server!</p>
+    
+    <div id="chat-box">
+        <input type="text" id="userInput" placeholder="Ask me something...">
+        <button onclick="sendMessage()">Send</button>
+        <p id="response">...</p>
+    </div>
+
+    <script>
+        // Use 'async' because we have to wait for the server to reply
+        async function sendMessage() {
+            const inputField = document.getElementById('userInput');
+            const responseText = document.getElementById('response');
+            const message = inputField.value;
+
+            // 1. Show loading state
+            responseText.innerText = "Thinking...";
+
+            try {
+                // 2. Send the data to YOUR server
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+
+                // 3. Convert the server's answer to text
+                const data = await response.json();
+                
+                // 4. Display the answer
+                responseText.innerText = "Server says: " + data.reply;
+                
+            } catch (error) {
+                responseText.innerText = "Error: Could not connect to server.";
+            }
+        }
+    </script>
+</body>
+</html>
