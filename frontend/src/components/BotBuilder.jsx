@@ -17,7 +17,7 @@ const BotBuilder = () => {
 
   // --- Local Storage Logic (Persistence) ---
   useEffect(() => {
-    console.log("🚀 BotBuilder Version 2.0 Loaded (API Path: /api/chat)");
+    console.log("🚀 BotBuilder Component Mounted");
     const savedConfig = localStorage.getItem('botBuilder_config');
     const savedMessages = localStorage.getItem('botBuilder_messages');
     
@@ -48,17 +48,20 @@ const BotBuilder = () => {
   };
 
   const handleSendMessage = async (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+    if (e) e.preventDefault();
+    
+    // Safety check: Don't send if empty or already loading
+    if (!input.trim() || isLoading) return;
 
-    // Add User Message to UI
+    console.log("📤 Sending message:", input);
+
     const userMsg = { role: 'user', content: input };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsLoading(true);
 
     try {
-      // THE FIX: Ensure this matches your backend PORT and PATH exactly
+      // 🚨 ATTEMPTING BACKEND CONNECTION 🚨
       const response = await fetch('http://localhost:5000/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -68,21 +71,23 @@ const BotBuilder = () => {
         }),
       });
 
-      if (!response.ok) throw new Error(`Server Error: ${response.status}`);
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
+      }
 
       const data = await response.json();
+      console.log("📥 Received from backend:", data);
 
-      // Add Bot Response to UI
       setMessages(prev => [...prev, { 
         role: 'bot', 
-        content: data.reply || "I'm having trouble thinking right now." 
+        content: data.reply 
       }]);
 
     } catch (error) {
-      console.error("Connection Error:", error);
+      console.error("❌ Connection Error:", error);
       setMessages(prev => [...prev, { 
         role: 'system', 
-        content: "🚨 CONNECTION ERROR: Ensure 'node server.js' is running in your backend terminal!" 
+        content: `🚨 ERROR: Could not connect to backend. Is 'node server.js' running? (${error.message})` 
       }]);
     } finally {
       setIsLoading(false);
@@ -90,65 +95,71 @@ const BotBuilder = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 flex flex-col gap-6 h-[800px]">
+    <div className="max-w-4xl mx-auto p-4 flex flex-col gap-6 h-[800px] text-slate-900">
       
       {/* Configuration Section */}
-      <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
-        <h2 className="text-xl font-bold mb-4 text-gray-900">Bot Configuration</h2>
+      <div className="bg-white p-6 rounded-lg shadow-lg border border-slate-200">
+        <h2 className="text-xl font-bold mb-4">Bot Configuration</h2>
         <div className="grid gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Bot Name</label>
+            <label className="block text-sm font-medium text-slate-600 mb-1">Bot Name</label>
             <input
               type="text"
               name="botName"
               value={config.botName}
               onChange={handleConfigChange}
-              className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none text-black bg-white"
+              className="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-cyan-500 outline-none bg-white"
               placeholder="e.g. Helpful Hal"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Personality</label>
+            <label className="block text-sm font-medium text-slate-600 mb-1">Personality Prompt</label>
             <textarea
               name="personality"
               value={config.personality}
               onChange={handleConfigChange}
-              className="w-full p-2 border rounded h-20 focus:ring-2 focus:ring-blue-500 outline-none text-black bg-white"
-              placeholder="e.g. You are a sarcastic assistant..."
+              className="w-full p-2 border border-slate-300 rounded h-20 focus:ring-2 focus:ring-cyan-500 outline-none bg-white"
+              placeholder="e.g. You are a sarcastic pirate who loves coding..."
             />
           </div>
         </div>
       </div>
 
       {/* Chat Interface */}
-      <div className="flex-1 flex flex-col bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
-        <div className="p-3 bg-gray-50 border-b flex justify-between items-center">
-          <span className="font-semibold text-gray-700">Live Preview: {config.botName || 'AI Bot'}</span>
-          <button onClick={handleClearChat} className="text-sm text-red-500 hover:text-red-700 font-medium">Reset Chat</button>
+      <div className="flex-1 flex flex-col bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden">
+        <div className="p-3 bg-slate-50 border-b flex justify-between items-center">
+          <span className="font-semibold text-slate-700">
+            Live Preview: <span className="text-cyan-600">{config.botName || 'AI Bot'}</span>
+          </span>
+          <button onClick={handleClearChat} className="text-sm text-red-500 hover:text-red-700 font-medium">
+            Clear Chat
+          </button>
         </div>
 
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
           {messages.length === 0 && (
-            <div className="text-center text-gray-400 mt-10">Type a message below to test your bot!</div>
+            <p className="text-center text-slate-400 mt-10 text-sm italic">Initialize your bot and say hello!</p>
           )}
+          
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[80%] p-3 rounded-lg shadow-sm ${
                 msg.role === 'user' 
-                  ? 'bg-blue-600 text-white rounded-br-none' 
+                  ? 'bg-cyan-500 text-white rounded-br-none' 
                   : msg.role === 'system'
-                  ? 'bg-red-50 text-red-600 text-xs border border-red-200 rounded-lg'
-                  : 'bg-white text-gray-800 border border-gray-200 rounded-bl-none'
+                  ? 'bg-red-50 text-red-600 text-xs border border-red-100 italic'
+                  : 'bg-slate-200 text-slate-800 rounded-bl-none'
               }`}>
                 {msg.content}
               </div>
             </div>
           ))}
+          
           {isLoading && (
             <div className="flex justify-start">
-              <div className="bg-gray-200 text-gray-500 text-sm p-2 rounded-lg italic animate-pulse">
-                Bot is thinking...
+              <div className="bg-slate-100 text-slate-400 text-sm p-3 rounded-lg animate-pulse">
+                {config.botName || 'Bot'} is thinking...
               </div>
             </div>
           )}
@@ -158,7 +169,7 @@ const BotBuilder = () => {
         {/* Input Area */}
         <form onSubmit={handleSendMessage} className="p-4 bg-white border-t flex gap-2">
           <input
-            className="flex-1 p-2 border rounded focus:outline-none focus:border-blue-500 text-black bg-white"
+            className="flex-1 p-2 border border-slate-300 rounded focus:outline-none focus:border-cyan-500 bg-white"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type a message..."
@@ -166,8 +177,8 @@ const BotBuilder = () => {
           />
           <button 
             type="submit" 
-            disabled={isLoading || !input}
-            className="bg-blue-600 text-white px-6 py-2 rounded font-semibold hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            disabled={false}
+            className="bg-purple-600 text-white px-6 py-2 rounded font-bold hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
             {isLoading ? '...' : 'Send'}
           </button>
