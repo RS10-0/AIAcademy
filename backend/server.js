@@ -1,37 +1,36 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config(); // Loads your API keys from the .env file
+require('dotenv').config();
 
-// Import the routes from your routes folder
+// 1. Double-check this path and variable name match your botRoutes.js export
 const { botRouter } = require('./routes/botRoutes'); 
 
 const app = express();
 
 // --- MIDDLEWARE ---
-app.use(cors());          // Allows your React frontend to talk to this backend
-app.use(express.json());  // Allows the backend to read JSON data sent from the frontend
+// This is essential. Without cors(), the browser blocks the frontend from talking to the backend.
+app.use(cors()); 
+app.use(express.json()); 
 
 // --- ROUTES ---
 
-// 1. Home Route (This fixes the "Cannot GET /" error)
+// Home Route (What you see when you click the link in the terminal)
 app.get('/', (req, res) => {
-  res.send('<h1>🚀 AI Academy Backend is Live!</h1><p>The server is running correctly.</p>');
+  res.send('<h1>🚀 AI Academy Backend is Live!</h1><p>The server is running correctly. Ready for API requests.</p>');
 });
 
-// 2. AI Bot Routes
-// Any request starting with /api (like http://localhost:5000/api/chat) goes here
+// AI Bot Routes
+// This ensures http://localhost:5000/api/chat is the correct address
 app.use('/api', botRouter);
 
-// 3. 404 Catch-all (For when a user types a wrong URL)
+// --- ERROR HANDLING ---
 app.use((req, res) => {
-  res.status(404).json({ message: "Route not found" });
+  res.status(404).json({ message: "Route not found. Check your URL path!" });
 });
 
-// --- ERROR HANDLING ---
-// This prevents the whole server from crashing if there's a code error
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong on our end!' });
+  console.error("Internal Server Error:", err.stack);
+  res.status(500).json({ error: 'Something went wrong on the server!' });
 });
 
 // --- START SERVER ---
@@ -39,6 +38,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`\n=========================================`);
   console.log(`🚀 Server running at: http://localhost:${PORT}`);
-  console.log(`✅ Press Ctrl+C to stop the server`);
+  console.log(`✅ Backend is ready to receive messages!`);
   console.log(`=========================================\n`);
 });
